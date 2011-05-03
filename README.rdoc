@@ -1,19 +1,20 @@
-= syncassets_r2
+This rake task will update (delete and copy) all the files under /public on s3, be patient
 
-Description goes here.
+The rake task will verify if the local file exist on s3 and 
+if the local file have been modified since the upload to s3.
 
-== Contributing to syncassets_r2
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+** Rails 2.3.4 **
 
-== Copyright
+In your Gemfile
+  gem 'sync-s3-gem'
 
-Copyright (c) 2011 Osledy Bazo. See LICENSE.txt for
-further details.
+In your Rakefile
+  Dir["#{Gem.searcher.find('sync-s3-gem').full_gem_path}/lib/tasks/**/*.rake"].each { |ext| load ext }
 
+In your config/S3.yml
+  aws_access_key: YOUR_ACCESS_KEY
+  aws_secret_access_key: YOUR_SECRET_ACCESS_KEY
+  aws_bucket_name: YOUR_BUCKET_NAME
+
+Example app using rails 2.3.4 ans sync-s3-Gemfile
+  https://github.com/uokesita/sync-s3-rails-2.3.4-example

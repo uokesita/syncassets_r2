@@ -15,8 +15,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "syncassets_r2"
   gem.homepage = "http://github.com/uokesita/syncassets_r2"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{This rake task will update (delete and copy) all the files under /public on s3, be patient}
+  gem.description = %Q{This rake task will update (delete and copy) all the files under /public on s3, be patient}
   gem.email = "osledybazo@gmail.com"
   gem.authors = ["Osledy Bazo"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
