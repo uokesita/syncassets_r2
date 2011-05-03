@@ -6,7 +6,7 @@ if the local file have been modified since the upload to s3.
 ** Rails 2.3.4 **
 
 In your Gemfile
-  gem 'sync-s3-gem'
+  gem 'syncassets_r2'
 
 In your Rakefile
   Dir["#{Gem.searcher.find('sync-s3-gem').full_gem_path}/lib/tasks/**/*.rake"].each { |ext| load ext }
@@ -15,6 +15,3 @@ In your config/S3.yml
   aws_access_key: YOUR_ACCESS_KEY
   aws_secret_access_key: YOUR_SECRET_ACCESS_KEY
   aws_bucket_name: YOUR_BUCKET_NAME
-
-Example app using rails 2.3.4 ans sync-s3-Gemfile
-  https://github.com/uokesita/sync-s3-rails-2.3.4-example
