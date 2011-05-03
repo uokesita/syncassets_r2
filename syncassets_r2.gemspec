@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{syncassets_r2}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Osledy Bazo"]
@@ -25,10 +25,8 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "init.rb",
-    "lib/railtie.rb",
     "lib/syncassets_r2.rb",
     "lib/tasks/syncassets_r2.rake",
-    "rails/init.rb",
     "syncassets_r2.gemspec",
     "test/helper.rb",
     "test/test_syncassets_r2.rb"
