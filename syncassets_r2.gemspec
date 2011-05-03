@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
     "lib/syncassets_r2.rb",
     "lib/tasks/syncassets_r2.rake",
     "rails/init.rb",
+    "syncassets_r2.gemspec",
     "test/helper.rb",
     "test/test_syncassets_r2.rb"
   ]
