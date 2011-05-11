@@ -11,7 +11,16 @@ In your Gemfile
 In your Rakefile
   Dir["#{Gem.searcher.find('sync-s3-gem').full_gem_path}/lib/tasks/**/*.rake"].each { |ext| load ext }
 
-In your config/S3.yml
-  aws_access_key: YOUR_ACCESS_KEY
-  aws_secret_access_key: YOUR_SECRET_ACCESS_KEY
-  aws_bucket_name: YOUR_BUCKET_NAME
+In your config/aws.yml
+  development:
+    access_key_id:     'YOUR_ACCESS_KEY'
+    secret_access_key: 'YOUR_SECRET_ACCESS_KEY'
+    bucket:            'YOUR_BUCKET_NAME'
+  test:
+    access_key_id:     'YOUR_ACCESS_KEY'
+    secret_access_key: 'YOUR_SECRET_ACCESS_KEY'
+    bucket:            'YOUR_BUCKET_NAME'
+  production:
+    access_key_id:     'YOUR_ACCESS_KEY'
+    secret_access_key: 'YOUR_SECRET_ACCESS_KEY'
+    bucket:            'YOUR_BUCKET_NAME'

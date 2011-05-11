@@ -1,4 +1,5 @@
 require 'fog'
+require 'syncassets_r2'
 namespace :syncassets do
 
   desc "Synchronize public folder with s3" 
@@ -8,12 +9,11 @@ namespace :syncassets do
     puts "##      all the files under /public on s3, be patient    "
     puts "#########################################################"
 
-    @settings = YAML.load_file(File.join(Rails.root, 'config', 's3.yml'))
     @fog = Fog::Storage.new( :provider              => 'AWS', 
-                             :aws_access_key_id     => @settings['aws_access_key'], 
-                             :aws_secret_access_key => @settings['aws_secret_access_key'], 
+                             :aws_access_key_id     => Credentials.key, 
+                             :aws_secret_access_key => Credentials.secret, 
                              :persistent            => false )
-    @directory = @fog.directories.create( :key => @settings['aws_bucket_name'] )
+    @directory = @fog.directories.create( :key => Credentials.bucket )
 
     upload_directory
   end
