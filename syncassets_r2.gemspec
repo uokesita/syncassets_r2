@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{syncassets_r2}
-  s.version = "0.2.1"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Osledy Bazo"]
-  s.date = %q{2011-05-03}
+  s.date = %q{2011-05-11}
   s.description = %q{This rake task will update (delete and copy) all the files under /public on s3, be patient}
   s.email = %q{osledybazo@gmail.com}
   s.extra_rdoc_files = [
