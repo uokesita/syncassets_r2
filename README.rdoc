@@ -9,7 +9,7 @@ In your Gemfile
   gem 'syncassets_r2'
 
 In your Rakefile
-  Dir["#{Gem.searcher.find('sync-s3-gem').full_gem_path}/lib/tasks/**/*.rake"].each { |ext| load ext }
+  Dir["#{Gem.searcher.find('syncassets_r2').full_gem_path}/lib/tasks/**/*.rake"].each { |ext| load ext }
 
 In your config/aws.yml
   development:
