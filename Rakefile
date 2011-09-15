@@ -15,8 +15,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "syncassets_r2"
   gem.homepage = "http://github.com/uokesita/syncassets_r2"
   gem.license = "MIT"
-  gem.summary = %q{This rake task will update (delete and copy) all the files under a directory to S3, by default is the public directory but you can pass as argument the path to the folder.}
-  gem.description = %q{This rake task will update (delete and copy) all the files under a directory to S3, by default is the public directory but you can pass as argument the path to the folder.}
+  gem.summary = %q{This rake task will update (delete and copy) all the files under the public directory to S3, by default is the public directory but you can pass as argument the path to the folder inside the public directory.}
+  gem.description = %q{This rake task will update (delete and copy) all the files under the public directory to S3, by default is the public directory but you can pass as argument the path to the folder inside the public directory.}
   gem.email = "osledybazo@gmail.com"
   gem.authors = ["Osledy Bazo"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,

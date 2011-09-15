@@ -1,4 +1,4 @@
-This rake task will update (delete and copy) all the files under a directory to S3, by default is the public directory but you can pass as argument the path to the folder.
+This rake task will update (delete and copy) all the files under the public directory to S3, by default is the public directory but you can pass as argument the path to the folder inside the public directory.
 
 The rake task will verify if the local file exist on s3 and 
 if the local file have been modified since the upload to s3.
@@ -24,3 +24,13 @@ In your config/aws.yml
     access_key_id:     'YOUR_ACCESS_KEY'
     secret_access_key: 'YOUR_SECRET_ACCESS_KEY'
     bucket:            'YOUR_BUCKET_NAME'
+
+Running the task
+  rake syncassets:sync_s3_public_assets
+  # this will sync all the folders and files under the /public directory of your app
+
+  rake syncassets:sync_s3_public_assets[javascripts]
+  # this will sync all the folders and files under the /public/javascripts directory of your app
+  
+  rake syncassets:sync_s3_public_assets[javascripts/some_folder]
+  # this will sync all the folders and files under the /public/javascripts/some_folder directory of your app

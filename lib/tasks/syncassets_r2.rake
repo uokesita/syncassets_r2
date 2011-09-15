@@ -3,7 +3,7 @@ require 'syncassets_r2'
 
 namespace :syncassets do
 
-  desc "Synchronize public folder with s3" 
+  desc "This rake task will update (delete and copy) all the files under the public directory to S3, by default is the public directory but you can pass as argument the path to the folder inside the public directory" 
   task :sync_s3_public_assets, :directory do |t, args|
     puts "#########################################################"
     puts "##          Syncing folders and files with S3          ##"

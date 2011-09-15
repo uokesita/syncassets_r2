@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Osledy Bazo"]
   s.date = %q{2011-09-15}
-  s.description = %q{This rake task will update (delete and copy) all the files under a directory to S3, by default is the public directory but you can pass as argument the path to the folder.}
+  s.description = %q{This rake task will update (delete and copy) all the files under the public directory to S3, by default is the public directory but you can pass as argument the path to the folder inside the public directory.}
   s.email = %q{osledybazo@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.4.2}
-  s.summary = %q{This rake task will update (delete and copy) all the files under a directory to S3, by default is the public directory but you can pass as argument the path to the folder.}
+  s.summary = %q{This rake task will update (delete and copy) all the files under the public directory to S3, by default is the public directory but you can pass as argument the path to the folder inside the public directory.}
   s.test_files = [
     "test/helper.rb",
     "test/test_syncassets_r2.rb"
