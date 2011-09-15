@@ -1,12 +1,12 @@
 require 'fog'
 require 'syncassets_r2'
+
 namespace :syncassets do
 
   desc "Synchronize public folder with s3" 
-  task :sync_s3_public_assets do
+  task :sync_s3_public_assets, :directory do |t, args|
     puts "#########################################################"
-    puts "##      This rake task will update (delete and copy)     "
-    puts "##      all the files under /public on s3, be patient    "
+    puts "##          Syncing folders and files with S3          ##"
     puts "#########################################################"
 
     @fog = Fog::Storage.new( :provider              => 'AWS', 
@@ -18,6 +18,7 @@ namespace :syncassets do
 
     @files_for_invalidation = []
     @distribution_ids       = []
+    @root_directory         = "#{args[:directory]}"
 
     get_distribution_ids
     upload_directory
@@ -32,14 +33,19 @@ namespace :syncassets do
 
   def get_distribution_ids
     get_cdn_connection
-
-    distributions = @cdn.get_distribution_list()
-    distributions.body["DistributionSummary"].each do |distribution|
-      @distribution_ids << distribution["Id"]
+    
+    if Credentials.distribution_ids.empty?
+      distributions = @cdn.get_distribution_list()
+      distributions.body["DistributionSummary"].each do |distribution|
+        @distribution_ids << distribution["Id"]
+      end
+    else
+      @distribution_ids = Credentials.distribution_ids
     end
   end
 
-  def upload_directory(asset='/')
+  def upload_directory(asset = @root_directory || '/')
+    
     Dir.entries(File.join(Rails.root, 'public', asset)).each do |file|
       next if file =~ /\A\./
       
@@ -52,7 +58,13 @@ namespace :syncassets do
   end
 
   def upload_file asset, file
-    file_name   = asset == "/" ? file : "#{asset}/#{file}".sub('/','')
+
+    if @root_directory.blank?
+      file_name   = asset == "/" ? file : "#{asset}/#{file}".sub('/','')
+    else
+      file_name   = asset == "/" ? file : "#{asset}/#{file}"
+    end
+
     remote_file = get_remote_file(file_name)
 
     if check_timestamps(file_name, remote_file)
@@ -84,18 +96,27 @@ namespace :syncassets do
   end
 
   def queue_file_for_invalidation asset, file
-    path_to_file = asset == "/" ? "#{asset}#{file}" : "#{asset}/#{file}"
+    if @root_directory.blank?
+      path_to_file = asset == "/" ? "#{asset}#{file}" : "#{asset}/#{file}"
+    else
+      path_to_file = asset == "/" ? "/#{asset}#{file}" : "/#{asset}/#{file}"
+    end
     @files_for_invalidation << path_to_file
     puts "Queued for invalidation: #{path_to_file}"
+    if @files_for_invalidation.size == 200
+      invalidate_files
+    end
   end
 
   def invalidate_files
-    get_cdn_connection
-
-    @distribution_ids.each do |id|
-      puts "Invalidating files of distribution #{id}"
-      @cdn.post_invalidation(id, @files_for_invalidation, caller_reference = Time.now.to_i.to_s)
-      puts "Invalidation list queued"
+    unless @files_for_invalidation.size < 1
+      get_cdn_connection
+      @distribution_ids.each do |id|
+        puts "Invalidating files of distribution #{id}"
+        @cdn.post_invalidation(id, @files_for_invalidation, caller_reference = Time.now.to_i.to_s)
+        puts "Invalidation list queued"
+      end
+      @files_for_invalidation.clear
     end
   end
 

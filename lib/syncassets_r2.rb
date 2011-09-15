@@ -27,6 +27,12 @@ class Credentials
     def self.bucket
       Auth.root[Auth.env]['bucket']
     end
+    def self.distribution_ids
+      unless Auth.root[Auth.env]['distribution_ids'].nil?
+        return Auth.root[Auth.env]['distribution_ids'].gsub(' ','').split(',')
+      end
+      []
+    end
   rescue
     puts"syncassets_r3 : AWS Access Key Id needs a subscription for the service."
   end

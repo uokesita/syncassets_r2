@@ -1,4 +1,4 @@
-This rake task will update (delete and copy) all the files under /public on s3, be patient
+This rake task will update (delete and copy) all the files under a directory to S3, by default is the public directory but you can pass as argument the path to the folder.
 
 The rake task will verify if the local file exist on s3 and 
 if the local file have been modified since the upload to s3.
